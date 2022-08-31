@@ -1,5 +1,5 @@
-const url = "http://localhost:8080/api/contacts";
-// "http://jonathanototb22-env.eba-472gmmwp.us-east-2.elasticbeanstalk.com/api/contacts"
+const url =
+  "http://jonathanototb22-env.eba-472gmmwp.us-east-2.elasticbeanstalk.com/api/contacts";
 
 export function getAllContacts() {
   return fetch(url, {
@@ -36,7 +36,7 @@ export function updateContact(id, contact) {
 }
 
 export function deleteContact(id) {
-  return fetch(`http://localhost:8080/api/contacts/${id}`, {
+  return fetch(`${url}/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     mode: "cors",
