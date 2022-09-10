@@ -38,6 +38,8 @@ const ContactForm = (props) => {
               .then((response) => response.json())
               .then((data) => props.setContacts(data["data"]));
             props.history.push("/");
+          } else {
+            setErrorMsg("Server error");
           }
         });
       } else {
@@ -47,6 +49,8 @@ const ContactForm = (props) => {
             getAllContacts()
               .then((response) => response.json())
               .then((data) => props.setContacts(data["data"]));
+          } else {
+            setErrorMsg("Server error");
           }
         });
       }
