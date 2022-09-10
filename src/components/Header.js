@@ -13,6 +13,9 @@ const Header = () => {
         <NavLink to="/add" className="link" activeClassName="active">
           Add Contact
         </NavLink>
+        <NavLink to="/currencies" className="link" activeClassName="active">
+          Currencies
+        </NavLink>
       </div>
     </header>
   );

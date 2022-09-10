@@ -4,15 +4,21 @@ import Header from "../components/Header";
 import AddContact from "../components/AddContact";
 import ContactsList from "../components/ContactsList";
 import EditContact from "../components/EditContact";
+import AsianCurrencies from "../components/AsianCurrencies";
 import { getAllContacts } from "../services/ContactService";
+import { getAsianCurrencies } from "../services/CurrencyService";
 
 const AppRouter = () => {
   const [contacts, setContacts] = useState([]);
+  const [asianCurrencies, setAsianCurrencies] = useState({});
   useEffect(() => {
     // data fetching here
     getAllContacts()
       .then((response) => response.json())
       .then((data) => setContacts(data["data"]));
+    getAsianCurrencies()
+      .then((response) => response.json())
+      .then((data) => setAsianCurrencies(data));
   }, []);
   return (
     <BrowserRouter>
@@ -50,6 +56,16 @@ const AppRouter = () => {
                 />
               )}
               path="/edit/:id"
+            />
+            <Route
+              render={(props) => (
+                <AsianCurrencies
+                  {...props}
+                  asianCurrencies={asianCurrencies}
+                  setAsianCurrencies={setAsianCurrencies}
+                />
+              )}
+              path="/currencies"
             />
             <Route component={() => <Redirect to="/" />} />
           </Switch>

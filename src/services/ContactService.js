@@ -1,5 +1,5 @@
 const url =
-  "http://jonathanototb22-env.eba-472gmmwp.us-east-2.elasticbeanstalk.com/api/contacts";
+  "http://jonathanototb22-env.eba-4jp2bjjw.ap-southeast-1.elasticbeanstalk.com/api/contacts";
 
 export function getAllContacts() {
   return fetch(url, {

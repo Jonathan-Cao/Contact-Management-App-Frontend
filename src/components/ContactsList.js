@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import { deleteContact, getAllContacts } from "../services/ContactService";
 
 const ContactsList = ({ contacts, setContacts }) => {
-  console.log(contacts);
+  // console.log(contacts);
   const handleRemoveContact = (id) => {
     deleteContact(id).then((response) => {
       if (response.status === 200) {
