@@ -7,7 +7,7 @@ const AddContact = ({ contacts, setContacts }) => {
 
   const handleOnSubmit = (contact) => {
     addContact(contact).then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSuccessMsg("Contact added successfully");
         getAllContacts()
           .then((response) => response.json())
