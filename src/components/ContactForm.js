@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import {
+  addContact,
+  getAllContacts,
+  updateContact,
+} from "../services/ContactService";
 
 const ContactForm = (props) => {
   const [contact, setContact] = useState({
@@ -10,6 +15,7 @@ const ContactForm = (props) => {
   });
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const { name, email, gender, phone } = contact;
 
   const handleOnSubmit = (event) => {
@@ -23,7 +29,27 @@ const ContactForm = (props) => {
         phone,
       };
       setErrorMsg("");
-      props.handleOnSubmit(contact);
+
+      // is editing
+      if (props.contact) {
+        updateContact(props.id, contact).then((response) => {
+          if (response.status === 200) {
+            getAllContacts()
+              .then((response) => response.json())
+              .then((data) => props.setContacts(data["data"]));
+            props.history.push("/");
+          }
+        });
+      } else {
+        addContact(contact).then((response) => {
+          if (response.status === 201) {
+            setSuccessMsg("Contact added successfully");
+            getAllContacts()
+              .then((response) => response.json())
+              .then((data) => props.setContacts(data["data"]));
+          }
+        });
+      }
     }
   };
 
@@ -95,10 +121,11 @@ const ContactForm = (props) => {
           />
         </Form.Group>
         <Button variant="primary" type="submit" className="submit-btn">
-          Submit
+          {props.contact ? "Edit Contact" : "Add New Contact"}
         </Button>
       </Form>
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+      {successMsg && <p className="successMsg">{successMsg}</p>}
     </div>
   );
 };
